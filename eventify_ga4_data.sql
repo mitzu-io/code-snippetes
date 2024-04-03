@@ -1,5 +1,5 @@
 CREATE OR REPLACE TABLE
-  analytics_307711707.ga4_events 
+  <schema>.ga4_events 
 AS (
 WITH
   event_properties AS (
@@ -11,7 +11,7 @@ WITH
     PARSE_JSON("{\""|| STRING_AGG(p.key || "\":\""|| COALESCE(coalesce(COALESCE(p.value.string_value, CAST(p.value.int_value AS string)),
             CAST(p.value.float_value AS string)), CAST(p.value.double_value AS string)),"\",\"") || "\"}") AS event_params,
   FROM
-    `mitzu-358611.analytics_307711707.events_*`,
+    `<project>.<schema>.events_*`,
     UNNEST(event_params) AS p
   GROUP BY
     1,
@@ -27,7 +27,7 @@ WITH
     PARSE_JSON("{\""|| STRING_AGG(p.key || "\":\""|| COALESCE(coalesce(COALESCE(p.value.string_value, CAST(p.value.int_value AS string)),
             CAST(p.value.float_value AS string)), CAST(p.value.double_value AS string)),"\",\"") || "\"}") AS user_properties,
   FROM
-    `mitzu-358611.analytics_307711707.events_*`,
+    `<project>.<schema>.events_*`,
     UNNEST(user_properties) AS p
   GROUP BY
     1,
@@ -43,7 +43,7 @@ SELECT
     user_properties,
     items)
 FROM
-  `mitzu-358611.analytics_307711707.events_*` AS evt
+  `<project>.<schema>.events_*` AS evt
 LEFT JOIN
   event_properties ep
 ON
