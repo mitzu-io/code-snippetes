@@ -43,7 +43,7 @@ The target dataset must be in the same location as the export dataset. BigQuery 
 
 ## 1. Create the dataset and the procedure
 
-Replace the placeholders in [`ga4_events_to_json.sql`](ga4_events_to_json.sql) and run it once in the BigQuery console. It creates the target dataset and the procedure `ga4_events_to_json`. Nothing is copied yet.
+Replace the placeholders in [`ga4_events_to_json.sql`](ga4_events_to_json.sql) and run it once in the BigQuery console. It creates the target dataset and the procedure `ga4_events_to_json`. Nothing is copied yet. Its first line, `SET @@location`, makes BigQuery run the script in your export's location; without it the console may pick `US` and the dataset creation fails.
 
 The procedure takes four arguments:
 
@@ -138,6 +138,7 @@ Filter on `_TABLE_SUFFIX` so BigQuery reads only the days you need.
 
 ## Troubleshooting
 
+- **`Location specified in query ... is not consistent with current execution region US`**: the script ran in the default location. Keep the `SET @@location` line at the top of the setup script.
 - **`Not found: Dataset ... was not found in location ...`**: the target dataset and the export dataset are in different locations. Delete the target dataset and create it again with the export's location.
 - **`Access Denied`** in the scheduled query's run history: the account that runs it is missing one of the roles under [Requirements](#requirements).
 - **No tables after the backfill**: check that the export writes daily tables named `events_YYYYMMDD`, and that `<table_prefix>` matches them.

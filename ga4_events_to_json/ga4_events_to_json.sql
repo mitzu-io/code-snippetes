@@ -3,6 +3,8 @@
 -- procedure (see README.md for the backfill, the daily scheduled query and every argument).
 -- https://github.com/mitzu-io/code-snippetes/tree/main/ga4_events_to_json
 
+SET @@location = '<location>';
+
 CREATE SCHEMA IF NOT EXISTS `<project_id>.<mitzu_dataset>`
 OPTIONS (location = '<location>');
 
