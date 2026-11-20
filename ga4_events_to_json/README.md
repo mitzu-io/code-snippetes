@@ -134,7 +134,7 @@ Filter on `_TABLE_SUFFIX` so BigQuery reads only the days you need.
 
 ## Using the tables in Mitzu
 
-[Mitzu](https://mitzu.io) reads the JSON columns directly and lists every key as its own event property. Add the target dataset as a single event table named `events_2*` with user ID `user_pseudo_id`, event time `event_timestamp`, event name `event_name` and date partition `event_date`. The full walkthrough is in the Mitzu docs: [GA4 and Firebase exports as JSON](https://docs.mitzu.io/ga4-json-export).
+[Mitzu](https://mitzu.io) reads the JSON columns directly and lists every key as its own event property. Add the target dataset as a single event table named `events_2*` with user ID `user_pseudo_id`, event time `event_time`, event name `event_name` and date partition `event_date`; Mitzu's configuration agent sets this up when you ask it to add the tables. The full walkthrough is in the Mitzu docs: [GA4 and Firebase exports as JSON](https://docs.mitzu.io/ga4-json-export).
 
 ## Troubleshooting
 
